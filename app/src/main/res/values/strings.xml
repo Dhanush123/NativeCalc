@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Native Calc</string>
+    <string name="numPeople">Number of People:</string>
+    <string name="total_bill">Total Bill ($):</string>
+    <string name="tip">Tip (%):</string>
+    <string name="calculate">Calculate</string>
+    <string name="indivCost"></string>
+</resources>
