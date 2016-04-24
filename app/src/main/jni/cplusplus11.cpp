@@ -12,12 +12,12 @@ JNIEXPORT jdouble JNICALL
 Java_com_x10host_dhanushpatel_nativecalc_MainActivity_tipCalc
         (JNIEnv *env, jobject obj, jint numPeople, jdouble bill, jdouble tip)
 {
-    double total = bill + ((100 * tip)*bill);
-    double perPerson = (total/numPeople);
+    double total = bill + ((tip/100.0)*bill);
+    double perPerson = (total/((double)numPeople));
 
-    //to round accurately to 2 decimal places
-    perPerson = (int)(perPerson*100+0.5f);
-    perPerson = ((float)(perPerson))/100.0;
+
+    __android_log_print(ANDROID_LOG_INFO, "sometag", "test int = %d", total);
+    __android_log_print(ANDROID_LOG_INFO, "sometag2", "test int = %d",perPerson);
 
     if((perPerson*numPeople)<total){
         while((perPerson*numPeople)<total){

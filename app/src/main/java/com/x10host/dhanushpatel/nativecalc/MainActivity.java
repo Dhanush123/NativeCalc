@@ -2,6 +2,7 @@ package com.x10host.dhanushpatel.nativecalc;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,9 +30,10 @@ public class MainActivity extends AppCompatActivity {
         int numPeople = Integer.parseInt(peopleET.getText().toString());
         double bill = Integer.parseInt(billET.getText().toString());
         double tip = Integer.parseInt(tipET.getText().toString());
-        
 
-        double perPerson = tipCalc(numPeople,bill,tip);
+        Log.i("people:"+numPeople,"bill: "+bill+", tip: "+tip);
+
+        double perPerson = Math.round(tipCalc(numPeople,bill,tip) * 100.0)/100.0;
 
         ((TextView) findViewById(R.id.textView3)).setText(Double.toString(perPerson));
     }
