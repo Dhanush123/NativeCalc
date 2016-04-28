@@ -1,35 +1,88 @@
 #include <jni.h>
+#include <stack>
+#include <string>
+#include <cctype>
+#include <sstream>
 
 #include <android/log.h>
 
 using namespace std;
+stack<string> calcStack;
 
-#ifdef __cplusplus
 extern "C" {
-#endif
 
-JNIEXPORT jdouble JNICALL
-Java_com_x10host_dhanushpatel_nativecalc_MainActivity_tipCalc
-        (JNIEnv *env, jobject obj, jint numPeople, jdouble bill, jdouble tip)
-{
-    double total = bill + ((tip/100.0)*bill);
-    double perPerson = (total/((double)numPeople));
+int doOperation(double a,string s, double b) {
+    double result = 0;
+    if(s=="x"){
+     result = a * b;
+    }
+    else if(s=="/"){
+        result = a/b;
+    }
+    else if(s=="+"){
+        result = a+b;
+    }
+    else{
+        result = a - b;
+        //s == -
+    }
+    return result;
+}
 
 
-    __android_log_print(ANDROID_LOG_INFO, "sometag", "test int = %d", total);
-    __android_log_print(ANDROID_LOG_INFO, "sometag2", "test int = %d",perPerson);
 
-    if((perPerson*numPeople)<total){
-        while((perPerson*numPeople)<total){
-            perPerson = perPerson + 0.01;
-        }
+JNIEXPORT void JNICALL
+Java_com_x10host_dhanushpatel_nativecalc_MainActivity_ArrayAdd
+        (JNIEnv *env, jobjectArray calcArray) {
+
+    int size = env->GetArrayLength(calcArray);
+    string cppArray[size];
+    for (int i = 0; i < size; i++) {
+        jstring string = (jstring) ((env)->GetObjectArrayElement(calcArray, i));
+        const char *rawString = env->GetStringUTFChars(string, 0);
+        cppArray[i]=rawString;
     }
 
-    return perPerson;
+    int cSize = cppArray->size();
 
+    for (int j = cSize; j > 0; j--) {
+        if(cppArray[j]=="x" || cppArray[j]=="/" || cppArray[j]=="+" || cppArray[j]=="-"){
+            calcStack.push(cppArray[j]);
+        }
 
-
-#ifdef __cplusplus
+    }
+    for (int k = 0; k < cSize; k++) {
+        if(calcStack.size()!=1) {
+            if (isdigit(atof(cppArray[k].c_str()))) {
+                //add the numbers to stack
+                if (isdigit(atof(calcStack.top().c_str()))) {
+                    double topDigit = atof(calcStack.top().c_str());
+                    calcStack.pop();
+                    string topOp = calcStack.top();
+                    calcStack.pop();
+                    double currentDigit = atof(cppArray[k].c_str());
+                    double result = doOperation(topDigit, topOp, currentDigit);
+                    ostringstream oss;
+                    oss << result;
+                    calcStack.push(oss.str());
+                }
+                else {
+                    calcStack.push(cppArray[k]);
+                }
+            }
+        }
+    }
 }
-#endif
+
+
+JNIEXPORT jstring JNICALL
+Java_com_x10host_dhanushpatel_nativecalc_MainActivity_calcPrint
+        (JNIEnv *env) {
+
+
+    return env->NewStringUTF((const char *) calcStack.top().c_str());
+
+
+}
+
 }

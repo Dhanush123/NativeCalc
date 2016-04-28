@@ -7,78 +7,204 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.x10host.dhanushpatel.nativecalc.MainActivity">
+    tools:context="com.x10host.dhanushpatel.nativecalc.MainActivity"
+    android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/numPeople"
-        android:id="@+id/numPeople"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:text="0"
+        android:textSize="35sp"
+        android:id="@+id/calcShow" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/peopleET"
-        android:layout_below="@+id/numPeople"
-        android:layout_alignParentStart="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/total_bill"
-        android:id="@+id/textView"
-        android:layout_below="@+id/peopleET"
-        android:layout_alignParentStart="true" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="100dp"
+        android:layout_below="@id/calcShow"
+        android:layout_width="match_parent"
+        android:id="@+id/linearLayout1"
+        android:layout_marginTop="3pt"
+        android:layout_marginLeft="5pt"
+        android:layout_marginRight="5pt"
+        android:gravity="center|bottom"
+        >
+        <Button
+            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="7"
+            android:textSize="40sp"
+            android:id="@+id/b7">
+        </Button>
+        <Button
+            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="8"
+            android:textSize="40sp"
+            android:id="@+id/b8">
+        </Button>
+        <Button
+            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="9"
+            android:textSize="40sp"
+            android:id="@+id/b9">
+        </Button>
+        <Button
+            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="("
+            android:textSize="40sp"
+            android:id="@+id/bLP">
+        </Button>
+        <Button
+            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text=")"
+            android:textSize="40sp"
+            android:id="@+id/bRP">
+        </Button>
+    </LinearLayout>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/billET"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentStart="true" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:id="@+id/linearLayout2"
+        android:layout_marginTop="3pt"
+        android:layout_marginLeft="5pt"
+        android:layout_marginRight="5pt"
+        android:gravity="center|bottom"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_alignParentStart="true"
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/calculate"
-        android:id="@+id/calcButton"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="calculateIndiv"/>
+        >
+        <Button
+            android:layout_height="wrap_content"  android:onClick="calcAdd"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="4"
+            android:textSize="40sp"
+            android:id="@+id/b4">
+        </Button>
+        <Button
+            android:layout_height="wrap_content"  android:onClick="calcAdd"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="5"
+            android:textSize="40sp"
+            android:id="@+id/b5">
+        </Button>
+        <Button
+            android:layout_height="wrap_content"  android:onClick="calcAdd"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="6"
+            android:textSize="40sp"
+            android:id="@+id/b6">
+        </Button>
+        <Button
+            android:layout_height="wrap_content"  android:onClick="calcAdd"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="x"
+            android:textSize="40sp"
+            android:id="@+id/bMult">
+        </Button>
+        <Button
+            android:layout_height="wrap_content"  android:onClick="calcAdd"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="/"
+            android:textSize="40sp"
+            android:id="@+id/bDiv">
+        </Button>
+    </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/tip"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/billET"
-        android:layout_alignParentStart="true" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_below="@id/linearLayout2"
+        android:id="@+id/linearLayout3"
+        android:layout_marginTop="3pt"
+        android:layout_marginLeft="5pt"
+        android:layout_marginRight="5pt"
+        android:layout_weight="0.01"
+        android:gravity="center|bottom">
+        <Button
+            android:layout_height="wrap_content"  android:onClick="calcAdd"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="1"
+            android:textSize="40sp"
+            android:id="@+id/b1">
+        </Button>
+        <Button
+            android:layout_height="wrap_content"  android:onClick="calcAdd"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="2"
+            android:textSize="40sp"
+            android:id="@+id/b2">
+        </Button>
+        <Button
+            android:layout_height="wrap_content"  android:onClick="calcAdd"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="3"
+            android:textSize="40sp"
+            android:id="@+id/b3">
+        </Button>
+        <Button
+            android:layout_height="wrap_content"  android:onClick="calcAdd"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="+"
+            android:textSize="40sp"
+            android:id="@+id/bPlus">
+        </Button>
+        <Button
+            android:layout_height="wrap_content"  android:onClick="calcAdd"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="-"
+            android:textSize="40sp"
+            android:id="@+id/bMin">
+        </Button>
+    </LinearLayout>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/tipET"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/calcButton"
-        android:layout_alignStart="@+id/calcButton"
-        android:text="@string/indivCost" />
-
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_below="@id/linearLayout3"
+        android:id="@+id/linearLayout4"
+        android:layout_marginTop="3pt"
+        android:layout_marginLeft="5pt"
+        android:layout_marginRight="5pt"
+        android:gravity="center|bottom">
+        <Button
+            android:layout_height="wrap_content"  android:onClick="calcAdd"
+            android:layout_width="match_parent"
+            android:layout_weight="0.66"
+            android:text="0"
+            android:textSize="40sp"
+            android:id="@+id/b0">
+        </Button>
+        <Button
+            android:layout_height="wrap_content"  android:onClick="calcSum"
+            android:layout_width="match_parent"
+            android:layout_weight="0."
+            android:text="="
+            android:textSize="40sp"
+            android:id="@+id/bEquals">
+        </Button>
+    </LinearLayout>
 </RelativeLayout>

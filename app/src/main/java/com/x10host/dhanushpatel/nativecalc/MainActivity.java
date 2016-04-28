@@ -2,42 +2,47 @@ package com.x10host.dhanushpatel.nativecalc;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private native int tipCalc(int x ,double y ,double z);
+    private native String calcPrint();
+    ArrayList<String> jCalcList = new ArrayList<>();
+    TextView calcShow;
 
     static {
         System.loadLibrary("cplusplus11");
     }
 
-    EditText peopleET, billET, tipET;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        peopleET = (EditText) findViewById(R.id.peopleET);
-        billET = (EditText) findViewById(R.id.billET);
-        tipET = (EditText) findViewById(R.id.tipET);
+        calcShow = (TextView) findViewById(R.id.calcShow);
 
     }
 
-    public void calculateIndiv(View view){
-        int numPeople = Integer.parseInt(peopleET.getText().toString());
-        double bill = Integer.parseInt(billET.getText().toString());
-        double tip = Integer.parseInt(tipET.getText().toString());
-
-        Log.i("people:"+numPeople,"bill: "+bill+", tip: "+tip);
-
-        double perPerson = Math.round(tipCalc(numPeople,bill,tip) * 100.0)/100.0;
-
-        ((TextView) findViewById(R.id.textView3)).setText(Double.toString(perPerson));
+    public void calcAdd(View v) {
+        Button b = (Button) v;
+        String buttonText = b.getText().toString();
+        jCalcList.add(buttonText);
+       // stackAdd(buttonText);
     }
 
+    public void calcSum(View v){
+        int jclLength = jCalcList.size();
+        String[] jCalcArray = new String[jclLength];
+
+        for(int i=0; i < jclLength;i++){
+            jCalcArray[i]=jCalcList.get(i);
+        }
+
+        calcShow.setText(calcPrint());
+    }
 
 
 
