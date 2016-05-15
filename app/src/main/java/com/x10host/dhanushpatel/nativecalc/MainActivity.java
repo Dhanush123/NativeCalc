@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     TextView calcShow;
 
     static {
-        System.loadLibrary("cplusplus11");
+        System.loadLibrary("cCalc");
     }
 
     @Override
